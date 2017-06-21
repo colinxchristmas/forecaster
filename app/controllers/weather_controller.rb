@@ -15,12 +15,12 @@ class WeatherController < ApplicationController
     if cookie_check.present?
       # cookie check hash must be a string to convert to OpenStruct
       @clean_weather = clean_hash_string(cookie_check.to_s)
-      flash[:alert] = "You are pulling from a cached cookie."
+      flash.now[:notice] = "You are pulling from a cached cookie."
       render :show
     else
       @weather = check_weather
       if @weather.blank? || weather_params[:zipcode].empty?  #fix this at a later date but it's functional at the moment.
-        flash[:alert] = "There was a problem with your zipcode, please try again."
+        flash[:notice] = "There was a problem with your zipcode, please try again."
         redirect_to new_weather_path
       else
         set_session(@weather)

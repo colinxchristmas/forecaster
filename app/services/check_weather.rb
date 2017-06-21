@@ -1,3 +1,5 @@
+require 'net/http'
+
 class CheckWeather
   def initialize(params)
     @zipcode = params[:zipcode]

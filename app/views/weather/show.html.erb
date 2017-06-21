@@ -1,7 +1,5 @@
 <h1>Current Weather</h1>
 
-<%= render 'alerts' %>
-
 <% unless @clean_weather.nil? %>
   <img src="http://openweathermap.org/img/w/<%= @clean_weather.weather[0].icon %>.png" alt="weather icon"><br>
 
