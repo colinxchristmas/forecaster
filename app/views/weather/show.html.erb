@@ -1,0 +1,19 @@
+<h1>Current Weather</h1>
+
+<% unless @clean_weather.nil? %>
+  <img src="http://openweathermap.org/img/w/<%= @clean_weather.weather[0].icon %>.png" alt="weather icon"><br>
+
+  Weather: <%= @clean_weather.weather[0].main %><br>
+  Valid as of: <%= Time.at(@clean_weather.dt).strftime("%b %d %Y at %I:%M %p") %><br>
+  Current Temp: <%= @clean_weather.main.temp %> &#8457<br>
+  Low: <%= @clean_weather.main.temp_min %> &#8457<br>
+  High: <%= @clean_weather.main.temp_max %> &#8457<br>
+  Humidity: <%= @clean_weather.main.humidity %>%<br>
+  City: <%= @clean_weather.name %><br>
+  Country: <%= @clean_weather.sys.country %><br>
+  Sunrise: <%= Time.at(@clean_weather.sys.sunrise).strftime("%b %d %Y at %I:%M %p") %><br>
+  Sunset: <%= Time.at(@clean_weather.sys.sunset).strftime("%b %d %Y at %I:%M %p") %><br>
+
+<% end %>
+<br>
+<%= link_to "Check other locations", new_weather_path %>
