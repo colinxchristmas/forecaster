@@ -2,10 +2,8 @@
 <p>Find me in app/views/weather/new.html.erb</p>
 
 <%= form_tag weather_index_path do %>
-  <% flash.each do |type, message| %>
-    <p><%= message %></p>
-  <% end %>
-  
+  <%= render 'alerts' %>
+
   <%= text_field_tag name="zipcode" %>
   <%= submit_tag "Check Weather" %>
 <% end %>

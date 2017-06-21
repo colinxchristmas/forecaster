@@ -1,3 +1,19 @@
 <h1>Weather#index</h1>
 <p>Find me in app/views/weather/index.html.erb</p>
-<%= link_to "Get Weather", new_weather_path %>
+<%= link_to "Get Weather", new_weather_path %><br>
+<%= render 'alerts' %>
+<% unless @clean_weather.nil? %><br>
+  <img src="http://openweathermap.org/img/w/<%= @clean_weather.weather[0].icon %>.png" alt="weather icon"><br>
+  Weather: <%= @clean_weather.weather[0].main %><br>
+  Date: <%= Time.at(@clean_weather.dt) %><br>
+  Current Temp: <%= @clean_weather.main.temp %><br>
+  Low: <%= @clean_weather.main.temp_min %><br>
+  High: <%= @clean_weather.main.temp_max %><br>
+  Humidity: <%= @clean_weather.main.humidity %><br>
+  City: <%= @clean_weather.name %><br>
+  Country: <%= @clean_weather.sys.country %><br>
+  Sunrise: <%= Time.at(@clean_weather.sys.sunrise) %><br>
+  Sunset: <%= Time.at(@clean_weather.sys.sunset) %><br>
+  Should Expire: <%# @clean_weather %> / <%= Time.now %><br>
+  <hr>
+<% end %>

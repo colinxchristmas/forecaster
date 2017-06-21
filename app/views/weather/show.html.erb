@@ -1,14 +1,16 @@
 <h1>Weather#show</h1>
-<% unless @weather.nil? %>
-  <%# @weather.inspect %>
-  Current Temp: <%= convert_to_fahrenheit(@weather[:main][:temp]) %><br>
-  Low: <%= convert_to_fahrenheit(@weather[:main][:temp_min]) %><br>
-  High: <%= convert_to_fahrenheit(@weather[:main][:temp_max]) %><br>
-  Pressure: <%= @weather[:main][:pressure] %><br>
-  Humidity: <%= @weather[:main][:humidity] %><br>
-  City: <%= @weather[:name] %><br>
-  Country: <%= @weather[:sys][:country] %><br>
-  Sunrise: <%= Time.at(@weather[:sys][:sunrise]) %><br>
-  Sunset: <%= Time.at(@weather[:sys][:sunset]) %><br>
-  <!-- Icon: <img src="http://openweathermap.org/img/w/ " alt=""> -->
+<%= render 'alerts' %>
+<% unless @clean_weather.nil? %>
+<img src="http://openweathermap.org/img/w/<%= @clean_weather.weather[0].icon %>.png" alt="weather icon"><br>
+  Weather: <%= @clean_weather.weather[0].main %><br>
+  Date: <%= Time.at(@clean_weather.dt) %><br>
+  Current Temp: <%= @clean_weather.main.temp %><br>
+  Low: <%= @clean_weather.main.temp_min %><br>
+  High: <%= @clean_weather.main.temp_max %><br>
+  Humidity: <%= @clean_weather.main.humidity %><br>
+  City: <%= @clean_weather.name %><br>
+  Country: <%= @clean_weather.sys.country %><br>
+  Sunrise: <%= Time.at(@clean_weather.sys.sunrise) %><br>
+  Sunset: <%= Time.at(@clean_weather.sys.sunset) %><br>
+  Should Expire: <%# @clean_weather %> / <%= Time.now %><br>
 <% end %>

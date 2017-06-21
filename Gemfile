@@ -35,8 +35,6 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-
-gem 'open-weather-api'
 gem 'dotenv-rails', :require => 'dotenv/rails-now'
 
 group :development, :test do
