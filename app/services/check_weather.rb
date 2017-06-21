@@ -20,6 +20,7 @@ class CheckWeather
 
   def base_params(type)
     # future additions to allow different weather query types
+    # changing the @type to anything but 'current' will not output the call properly
     case type
     when 'daily'
       'forecast/daily?'
@@ -48,7 +49,8 @@ class CheckWeather
     uri = URI(url)
     response = Net::HTTP.get(uri)
     parsed_response = JSON.parse(response)
-    # depending on the type of query it can return a string or an integer
+    # for some reason it the response would return a string or an integer
+    # depending on the call
     if parsed_response['cod'] == 200 || parsed_response['cod'] == '200'
       parsed_response
     else
