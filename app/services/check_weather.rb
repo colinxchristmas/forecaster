@@ -6,7 +6,6 @@ class CheckWeather
 
   def call
     begin
-      # debugger
       search_url(type, zipcode)
     rescue
       false
@@ -18,6 +17,7 @@ class CheckWeather
   end
 
   def base_params(type)
+    # future additions to allow different weather query types
     case type
     when 'daily'
       'forecast/daily?'
@@ -31,6 +31,7 @@ class CheckWeather
   end
 
   def build_params(zipcode)
+    # default build params
     {
       zip: zipcode,
       APPID: ENV['OPEN_WEATHER_KEY'],
@@ -44,18 +45,13 @@ class CheckWeather
     url = search_url
     uri = URI(url)
     response = Net::HTTP.get(uri)
-    # parsed_response = JSON.parse(response).with_indifferent_access
     parsed_response = JSON.parse(response)
-      if parsed_response['cod'] == 200 || parsed_response['cod'] == '200'
-        parsed_response
-      else
-        parsed_response['cod']
-      end
-  end
-
-  def setup_indifferent_access(clean_hash)
-    clean_hash.default_proc = proc{|h, k| h.key?(k.to_s) ? h[k.to_s] : nil}
-    clean_hash.each { |k, v| setup_indifferent_access(v) if v.is_a?(Hash) }
+    # depending on the type of query it can return a string or an integer
+    if parsed_response['cod'] == 200 || parsed_response['cod'] == '200'
+      parsed_response
+    else
+      false
+    end
   end
 
   private

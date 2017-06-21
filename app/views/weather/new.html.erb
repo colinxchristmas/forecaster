@@ -1,9 +1,8 @@
-<h1>Weather#new</h1>
-<p>Find me in app/views/weather/new.html.erb</p>
-
+<h1>Find Weather</h1>
+<p>Add a valid US zip code and let's get started</p>
 <%= form_tag weather_index_path do %>
   <%= render 'alerts' %>
 
-  <%= text_field_tag name="zipcode" %>
+  <%= text_field_tag 'zipcode', nil, placeholder: 'Enter zip here...', required: true %>
   <%= submit_tag "Check Weather" %>
 <% end %>
